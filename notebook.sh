@@ -3,16 +3,21 @@
 # just for fun
 # enjoy!
 
+# TODO same field can show space not 0 or duplicate 
+# TODO replace total time ,not inserted
+# TODO insert new record before total time
+
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
 format="%-8s%-4s%-8s%-8s%-16s%-12s%-30s"
-format_comment="%"
-if ! [ -f "notebook.txt" ]; then
-    echo "notebook.txt not exists, auto create one" &&
-        touch notebook.txt && echo "notebook.txt created!" || 
-        echo "notebook.txt created fail"
-    printf "$format" Date Who Start Stop Interruptions TimeOnTask Comments >> notebook.txt &&
+filename=notebook.txt
+
+if ! [ -f "$filename" ]; then
+    echo "$filename not exists, auto create one" &&
+        touch $filename && echo "$filename created!" || 
+        echo "$filename created fail"
+    printf "$format" Date Who Start Stop Interruptions TimeOnTask Comments >> $filename &&
         echo "header inserted!" ||
         echo "header inserted fail!"
 fi
@@ -56,7 +61,7 @@ function record_new()
             task_time=$(($diff_time-$intr))
             echo "comment:"
             read -r comment
-            printf "\n$format" $start_date $name $start_time $end_time $intr $task_time $comment | tee -a notebook.txt
+            printf "$format\n" $start_date $name $start_time $end_time $intr $task_time "$comment" | tee -a $filename
             echo "record inserted!"
             break
         elif [ -z $rec_opt ];then
@@ -84,26 +89,44 @@ function record_new()
 
 function calculate()
 {
-
-
+    start_pattern="Q$1.*analysis"
+    end_pattern="Q$1.*finish"
+    start_row=$(awk -F ' ' -v s_pattern=$start_pattern '$0 ~ s_pattern{ print NR }' $filename)
+    end_row=$(awk -F ' ' -v e_pattern=$end_pattern '$0 ~ e_pattern { print NR }' $filename)
+    total_time=$(awk -F ' ' -v s=$start_row -v e=$end_row 'NR>=s && NR<=e{sum += $6} END {print sum}' $filename)
+    echo $total_time
 }
 
 while true
 do
-    echo "what's next(1: add record; 2: calculate total time; 3: commit and quit; 4: quit;): "
+    echo "what's next(1: add record 2: calculate total time 3: commit and quit 4: print 5: quit): "
     read -r opt
     case $opt in
         "1")
             record_new
             ;;
         "2")
-            calculate
+            i=0
+            while true
+            do
+                i=$(($i+1))
+                total_time=$(calculate $i)
+                if ! [ -z $total_time ];then
+                    echo "Total Time On Task Q$i (miniutes)            $total_time" >> notebook.txt
+                    echo "Total Time On Task Q$i (hours)               $(($total_time/60))" >> notebook.txt
+                else
+                    break
+                fi
+            done
             ;;
         "3")
-            echo "================committing to svn: $(date "+%m/%d %H:%M") ===================" >> notebook.txt
+            echo "================committing to svn: $(date "+%m/%d %H:%M") ===================" >> $filename
             svn commit
             ;;
         "4")
+            cat notebook.txt
+            ;;
+        "5")
             break
             ;;
         *)

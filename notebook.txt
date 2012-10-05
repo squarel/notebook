@@ -1,6 +1,25 @@
 Date    Who Start   Stop    Interruptions   TimeOnTask  Comments                      
-10/03   xl  23:53   00:17   1               xxx         sdfsdfsdfsdf                  
-10/04   xl  00:17   00:19   0               xxx         sdfdsf                        
-10/04   xl  00:48   00:49   1               1440        slkdfd                        
-10/04   xl  00:49   00:49   1               1439        sdfdsfd                       
-10/04   xl  01:12   01:12   1               -1          sfsdf                         
+10/03   xl  23:53   00:17   1               1           sdfsdfsdfsdf                  
+10/04   xl  00:17   00:19   0               2           Q1 analysis                     
+10/04   xl  00:48   00:49   1               3           slkdfd                        
+10/04   xl  00:49   00:49   1               4           Q1 finish                       
+10/04   xl  01:12   01:12   1               5           sfsdf                         
+10/04   xl  17:25   17:26   2               -1          sdfsdf                        
+10/04   xl  20:13   20:13   2               -2          lsdfj sdlkflks dfl ssd        
+10/04   xl  20:13   20:13   0               0           Q2 analysis dslfj ieu dfs      
+10/04   xl  20:14   20:14   0               0           sdfjsdlfjdslf                 
+10/04   xl  20:14   20:14   0               0           lsdfjldsfjs                   
+10/04   xl  20:14   20:14   0               0           Q2 finish sdlkfjlsd dsf sdf lds j
+Total Time On Task Q1 (miniutes)            9
+Total Time On Task Q1 (hours)               0
+Total Time On Task Q2 (miniutes)            12
+Total Time On Task Q2 (hours)               0
+Total Time On Task Q1 (miniutes)            9
+Total Time On Task Q1 (hours)               0
+Total Time On Task Q2 (miniutes)            12
+Total Time On Task Q2 (hours)               0
+Total Time On Task Q1 (miniutes)            9
+Total Time On Task Q1 (hours)               0
+Total Time On Task Q2 (miniutes)            0
+Total Time On Task Q2 (hours)               0
+================committing to svn: 10/04 20:20 ===================
