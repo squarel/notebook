@@ -17,7 +17,7 @@ if ! [ -f "$filename" ]; then
     echo "$filename not exists, auto create one" &&
         touch $filename && echo "$filename created!" || 
         echo "$filename created fail"
-    printf "$format" Date Who Start Stop Interruptions TimeOnTask Comments >> $filename &&
+    printf "$format\n" Date Who Start Stop Interruptions TimeOnTask Comments >> $filename &&
         echo "header inserted!" ||
         echo "header inserted fail!"
 fi
@@ -85,6 +85,7 @@ function record_new()
             done
         fi
     done
+    echo $comment
 }
 
 function calculate()
@@ -103,10 +104,13 @@ do
     read -r opt
     case $opt in
         "1")
-            record_new
+            comment=$(record_new)
+            echo "================committing to svn: $(date "+%m/%d %H:%M") ===================" >> $filename
+            svn commit -m "$comment"
             ;;
         "2")
             i=0
+            
             while true
             do
                 i=$(($i+1))
