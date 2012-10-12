@@ -2,6 +2,12 @@
 # PDP homework Notebook Taker
 # just for fun
 # enjoy!
+##########################################
+# USAGE:
+# "svn propedit svn:ignore ."
+# add notebook.sh
+# save and quit
+# copy or soft link notebook.sh
 
 # TODO same field can show space not 0 or duplicate 
 # TODO replace total time ,not inserted
@@ -109,15 +115,22 @@ do
             svn commit -m "$comment"
             ;;
         "2")
+            have_total_time=$(sed -n '/Total Time/p' $filename)
+            if [ -z "$have_total_time" ];then
+                echo "\n\n\n\n\n" >> $filename
+            else
+                sed '/Total Time/d' $filename > 1.txt
+                cat 1.txt > $filename
+                rm -f 1.txt
+            fi
             i=0
-            
             while true
             do
                 i=$(($i+1))
                 total_time=$(calculate $i)
                 if ! [ -z $total_time ];then
-                    echo "Total Time On Task Q$i (miniutes)            $total_time" >> notebook.txt
-                    echo "Total Time On Task Q$i (hours)               $(($total_time/60))" >> notebook.txt
+                    echo "Total Time On Task Q$i (miniutes)            $total_time" >> $filename
+                    echo "Total Time On Task Q$i (hours)               $(($total_time/60))" >> $filename
                 else
                     break
                 fi

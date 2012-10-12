@@ -10,16 +10,14 @@ Date    Who Start   Stop    Interruptions   TimeOnTask  Comments
 10/04   xl  20:14   20:14   0               0           sdfjsdlfjdslf                 
 10/04   xl  20:14   20:14   0               0           lsdfjldsfjs                   
 10/04   xl  20:14   20:14   0               0           Q2 finish sdlkfjlsd dsf sdf lds j
-Total Time On Task Q1 (miniutes)            9
-Total Time On Task Q1 (hours)               0
-Total Time On Task Q2 (miniutes)            12
-Total Time On Task Q2 (hours)               0
-Total Time On Task Q1 (miniutes)            9
-Total Time On Task Q1 (hours)               0
-Total Time On Task Q2 (miniutes)            12
-Total Time On Task Q2 (hours)               0
+================committing to svn: 10/04 20:20 ===================
+
+
+
+
+
+
 Total Time On Task Q1 (miniutes)            9
 Total Time On Task Q1 (hours)               0
 Total Time On Task Q2 (miniutes)            0
 Total Time On Task Q2 (hours)               0
-================committing to svn: 10/04 20:20 ===================
