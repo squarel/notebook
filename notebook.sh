@@ -18,6 +18,7 @@ export PATH
 
 format="%-8s%-4s%-8s%-8s%-16s%-12s%-30s"
 filename=notebook.txt
+comment="nothing"
 
 if ! [ -f "$filename" ]; then
     echo "$filename not exists, auto create one" &&
@@ -91,7 +92,6 @@ function record_new()
             done
         fi
     done
-    echo $comment
 }
 
 function calculate()
@@ -110,9 +110,9 @@ do
     read -r opt
     case $opt in
         "1")
-            comment=$(record_new)
+            record_new
             echo "================committing to svn: $(date "+%m/%d %H:%M") ===================" >> $filename
-            svn commit -m "$comment"
+            svn commit -m "$comment" 
             ;;
         "2")
             have_total_time=$(sed -n '/Total Time/p' $filename)
