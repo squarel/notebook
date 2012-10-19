@@ -44,9 +44,9 @@ function calculate_diff()
     m1=$(echo $start | cut -f 2 -d ':')
     m2=$(echo $end | cut -f 2 -d ':')
     if [ $h1 -le $h2 ];then
-        diff=$((($h2*60+$m2)-($h1*60+$m1)))
+        diff=$((($h2*60+10#$m2)-($h1*60+10#$m1)))
     else
-        diff=$((24*60-($h1*60+$m1)+($h2*60+$m2)))
+        diff=$((24*60-($h1*60+10#$m1)+($h2*60+10#$m2)))
     fi
     echo $diff
 }
