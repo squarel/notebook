@@ -10,13 +10,12 @@
 # copy or soft link notebook.sh
 
 # TODO same field can show space not 0 or duplicate 
-# TODO replace total time ,not inserted
 # TODO insert new record before total time
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
-format="%-8s%-4s%-8s%-8s%-16s%-12s%-30s"
+format="%-8s%-6s%-8s%-8s%-16s%-12s%-30s"
 filename=notebook.txt
 comment="nothing"
 
@@ -44,9 +43,9 @@ function calculate_diff()
     m1=$(echo $start | cut -f 2 -d ':')
     m2=$(echo $end | cut -f 2 -d ':')
     if [ $h1 -le $h2 ];then
-        diff=$((($h2*60+10#$m2)-($h1*60+10#$m1)))
+        diff=$(((10#$h2*60+10#$m2)-(10#$h1*60+10#$m1)))
     else
-        diff=$((24*60-($h1*60+10#$m1)+($h2*60+10#$m2)))
+        diff=$((24*60-(10#$h1*60+10#$m1)+(10#$h2*60+10#$m2)))
     fi
     echo $diff
 }
@@ -130,8 +129,7 @@ do
                 total_time=$(calculate $i)
                 if ! [ -z $total_time ];then
                     echo "Total Time On Task Q$i (miniutes)            $total_time" >> $filename
-                    echo "Total Time On Task Q$i (hours)               $(($total_time/60))" >> $filename
-                else
+                    echo "TOTQ$i (hours)               $(($total_time/60))" >> $filename else
                     break
                 fi
             done
