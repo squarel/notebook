@@ -128,8 +128,9 @@ do
                 i=$(($i+1))
                 total_time=$(calculate $i)
                 if ! [ -z $total_time ];then
-                    echo "Total Time On Task Q$i (miniutes)            $total_time" >> $filename
-                    echo "TOTQ$i (hours)               $(($total_time/60))" >> $filename else
+                    echo "Total Time On Task Q$i (miniutes)\t\t\t\t$total_time" >> $filename
+                    echo "TOTQ$i (hours)                   \t\t\t\t$(($total_time/60))" >> $filename 
+                else
                     break
                 fi
             done
